@@ -1,14 +1,34 @@
 import React from 'react';
-import { StudentContainer } from './student.styles';
+import Score from '../score/score.component';
+import { StudentContainer, StudentInfo, StudentName, StudentBio, StudentScoresContainer } from './student.styles';
 
 const Student = ({ student }) => {
-  console.log(student)
-  const { name, bio, scores } = student
-  return <StudentContainer>
-    Name: {name} <br />
-    Bio: {bio} <br />
-    # of Scores: {scores.length} <br />
-    </StudentContainer>;
+	const { name, bio, scores } = student;
+
+	return (
+		<StudentContainer>
+			<StudentInfo>
+        <StudentName>
+          <h3>Student:</h3>
+          {name}
+        </StudentName>
+
+        <StudentBio>
+          <h3>Bio:</h3>
+          {bio}
+        </StudentBio>
+
+        <StudentScoresContainer>
+          <h3>Scores:</h3>
+          {
+            scores.map(score => (
+              <Score score={score.score} date={score.date} />
+            ))
+          }
+        </StudentScoresContainer>
+      </StudentInfo>
+		</StudentContainer>
+	);
 };
 
 export default Student;
